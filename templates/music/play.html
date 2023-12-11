@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+
+    #audio-player {
+    background-color:grey;
+    max-width: 360px;
+    opacity: 0.70;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+
+   }
+
+   #audio-player {
+    transform: scale(1.05); /* Scale up on hover */
+    z-index: 2; }
+
+
+
+
+
+
+
+</style>
+
+
+    <center>
+        <div class="box" data-aos="flip-left"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="300"  >
+
+        <div id="audio-player">
+            <h5 style="color:red;">Now Playing: {{ song.Song_title }}</h5>
+
+            {% if song.album.Album_photo %}
+                <img src="{{ song.album.Album_photo.url }}" alt="{{ song.Song_title }}">
+            {% else %}
+                <div class="placeholder-image"></div>
+            {% endif %}
+
+            <audio controls controlsList="nodownload" autoplay>
+                <source src="{{ song.file.url }}" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+
+            <a href="{% url 'music:play' previous_song.id %}"  class="backward"> Backward
+            <i class="fas fa-backward" style="font-size: 24px; color: #3498db;"></i></a>
+
+
+            <i class="fas fa-hand-spock" style="font-size: 24px; color: #3498db;"></i></a>
+
+            <a href="{% url 'music:play' next_song.id %}" class="forward">
+                <i class="fas fa-forward" style="font-size: 24px; color: #3498db;"></i> Forward</a>
+
+            </div>
+        </div>
+    </center>
+{% endblock %}

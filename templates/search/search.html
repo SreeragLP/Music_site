@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    .card-title, .card-text {
+    color:black}
+</style>
+
+<div data-aos="fade-right"
+        class="container mt-5">
+    <h1 class="mb-4">Search Results for "{{ query }}"</h1>
+
+    <!-- Genres -->
+    <h2 class="mt-4">Genres</h2>
+    <div class="row">
+        {% for genre in results.genres %}
+            <div class="col-md-3 mb-4">
+                <div class="card">
+
+                    <img src="{{ genre.g_photo.url }}"
+
+                         class="card-img-top">
+
+                    <div class="card-body">
+                        <h5 class="card-title" >{{ genre.g_name }}</h5>
+                        <a href="{% url 'music:artist' genre.g_name %}" class="btn btn-outline-primary">Explore</a>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Artists -->
+    <h2 class="mt-4">Artists</h2>
+    <div class="row">
+        {% for artist in results.artists %}
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="
+
+                    {{ artist.Artist_photo.url }}
+
+                    " class="card-img-top">
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ artist.Artist_name }}</h5>
+                        <a href="{% url 'music:albums' artist.Artist_name %}" class="btn btn-outline-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Albums -->
+    <h2 class="mt-4">Albums</h2>
+    <div class="row">
+        {% for album in results.albums %}
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src=" {{ album.Album_photo.url }}"
+
+                     class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{ album.Album_title }}</h5>
+                        <p class="card-text">{{ album.artist.Artist_name }}</p>
+                         <a href="{% url 'music:songs' album.Album_title %}" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Songs -->
+    <h2 class="mt-4">Songs</h2>
+    <div class="row">
+        {% for song in results.songs %}
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="{{ song.album.Album_photo.url }}"
+
+                        class="card-img-top">
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ song.Song_title }}</h5>
+                        <p class="card-text">{{ song.album.artist.Artist_name }}</p>
+                        <a href="{% url 'music:play' song.id %}" class="play-link" style="color: black">
+                            <i class="fas fa-play" style="color: black; font-size: 21px;"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<center>
+    <div  data-aos="flip-left"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="500">
+
+        {% for song in songs %}
+            <div class="mb-4">
+                <div id="audio-player" class="card" style="max-width: 330px;
+                background-color: rgba(255, 255, 255, 0.2);">
+
+                    <h5 class="card-title text-danger">Now Playing: {{ song.Song_title }}</h5>
+                    {% if song.album.Album_photo %}
+
+                        <img src="{{ song.album.Album_photo.url }}" class="w-100">
+
+                    {% else %}
+
+                        <div class="placeholder-image"></div>
+
+                    {% endif %}
+
+                    <h6 class="card-subtitle text-info">Artist: {{ song.album.artist.Artist_name }}</h6>
+
+                     <button style="margin:5px" onclick="refreshPage()">
+                         <i class="fas fa-random" ></i> Shuffle
+                     </button>
+
+                    <audio controls controlsList="nodownload" autoplay class="w-100">
+                        <source src="{{ song.file.url }}" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        {% endfor %}
+
+<script>
+    function refreshPage() {
+        location.reload(true);
+    }
+</script>
+
+{% endblock %}

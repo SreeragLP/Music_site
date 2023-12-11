@@ -1,0 +1,50 @@
+
+
+
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    p {
+        color: black;
+    }
+</style>
+<center>
+<div class="container mt-5">
+
+    <div class="card p-4 text-center">
+        {% if msg == 'You are already subscribed' %}
+            <h1 class="display-4 text-warning">{{msg}}</h1>
+            <p class="mt-4">You are already a subscriber. Thank you for your continued support!</p>
+
+        {% elif msg == 'Subscribed successfully' %}
+            <h1 class="display-4 text-success">{{msg}}</h1>
+            <h3 class="text-success">Thank you</h3>
+            <p class="mt-4">Continue exploring and enjoying our music selection.</p>
+            <a href="{% url 'music:home' %}" class="btn btn-success mt-3">Continue Listening</a>
+
+        {% elif msg == 'Insufficient bank balance' %}
+            <h1 class="display-4 text-danger">{{msg}}</h1>
+            <p >Please ensure you have sufficient bank balance to subscribe.</p>
+            <a href="{% url 'mysub:sub' %}" class="btn btn-success mt-3">Go back</a>
+
+
+        {% elif msg == 'You must type an account number' %}
+            <h1 class="display-4 text-danger">{{msg}}</h1>
+            <p >You must type an account number.</p>
+            <a href="{% url 'mysub:sub' %}" class="btn btn-success mt-3">Go back</a>
+
+
+        {% elif msg == 'Invalid account number' %}
+            <h1 class="display-4 text-danger">{{msg}}</h1>
+            <p >Please check the provided account number and try again.</p>
+            <a href="{% url 'mysub:sub' %}" class="btn btn-success mt-3">Go Back</a>
+
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+

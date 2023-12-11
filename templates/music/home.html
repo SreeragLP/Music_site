@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+    #audio-player {
+    max-width: 300px;
+    margin: 0 auto; /* Center the player on the page */
+}
+
+</style>
+
+
+<div  data-aos="zoom-in-down" class="container mt-4">
+    <h1 class="text-center mb-4">Welcome to Symphony Horizon {{ user.first_name }}</h1>
+
+
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'images/b3o.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/b33.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/b55.png' %}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+
+
+
+    <div class="row">
+        <!-- Genres -->
+        <div
+             class="col-md-6 mb-4">
+
+            <h2 class="mb-3">Browse Genres</h2>
+            <div data-aos="zoom-in"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="2000" class="row row-cols-1 row-cols-md-2 g-4">
+                {% for genre in genres %}
+                    <div class="col mb-4">
+                        <div class="card h-100 border-dark" style="background-color:grey">
+
+                            <img src="{{ genre.g_photo.url }}" class="card-img-top" alt="{{ genre.g_name }}">
+
+                            <div class="card-body">
+                                <h5 style="color:black">{{ genre.g_name }}</h5>
+                                <a href="{% url 'music:artist' genre.g_name %}" class="btn btn-outline-primary">Explore</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Featured Playlists -->
+        <div class="col-md-6 mb-4">
+            <h2 class="mb-3">Featured Playlists</h2>
+
+
+
+
+
+             <!-- Artists -->
+            <div class="scroll-box border p-3 mt-4">
+                <h2 class="mt-4">Trending Artists</h2>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    {% for artist in artists %}
+
+                        <div data-aos="zoom-in"  class="col mb-4">
+
+                            <div class="card h-100 border-dark">
+                                <img src="{{ artist.Artist_photo.url }}" class="card-img-top" style="border-radius: 50%;">
+
+                                <div class="card-body">
+<!--                                    <h5 class="card-title text-danger">{{ artist.Artist_name }}</h5>-->
+                                    <a href="{% url 'music:albums' artist.Artist_name %}" class="btn btn-outline-primary">Explore</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            <!-- Songs -->
+            <div class="scroll-box border p-1 mt-2">
+                <h2>Trending Songs</h2> <br>
+
+                <center><div data-aos="flip-left">
+
+                    {% for song in songs %}
+                        <div  class="mb-4">
+                            <div  id="audio-player" class="card">
+                                <h4 class="card-title text-danger"> {{ song.Song_title }}</h4>
+                                {% if song.album.Album_photo %}
+
+                                    <img src="{{ song.album.Album_photo.url }}">
+                                {% else %}
+
+                                    <div class="placeholder-image"></div>
+
+                                {% endif %}
+
+                                <h6 class="card-subtitle text-info">Artist: {{ song.album.artist.Artist_name }}</h6>
+                                <audio controls controlsList="nodownload">
+                                    <source src="{{ song.file.url }}" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                           </div>
+                       {% endfor %}
+                    </div>
+               </div>
+
+             <!-- Trending Albums -->
+<!--            <div class="scroll-box border p-3 mt-4">-->
+                <h2>Trending Albums</h2>
+
+                <div data-aos="zoom-in" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+                    {% for trend in trends %}
+                        <div class="col mb-4">
+                            <div class="card h-100 border-dark">
+                                <img src="{{ trend.Album_photo.url }}" class="card-img-top" >
+                                <div class="card-body">
+                                    <h5 class="card-title text-danger">{{ trend.Album_title }}</h5>
+                                    <a href="{% url 'music:songs' trend.Album_title %}"
+                                       class="btn btn-primary"> Explore</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    .custom-card-size {
+        width: 16rem;
+    }
+
+
+     body {
+    background-image: url('{% static 'images/de1.jpg' %}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+</style>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Complete Album Collection</h1>
+
+    {% for letter, albums in grouped_albums.items %}
+        <h2>{{ letter }}</h2>
+
+        <div  data-aos="fade-right"
+     data-aos-offset="100"
+     data-aos-easing="ease-in-sine" class="row">
+
+            {% for album in albums %}
+                <div class="col-md-3 mb-5 custom-card-size">
+                    <div class="card">
+                        {% if album.Album_photo %}
+                            <img src="{{ album.Album_photo.url }}" class="card-img-top">
+                        {% else %}
+                            <div class="placeholder-image"></div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title" style="color: black;">{{ album.Album_title }}</h5>
+                            <a href="{% url 'music:songs' album.Album_title %}" class="btn btn-outline-primary">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

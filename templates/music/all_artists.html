@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+.custom-card-size {
+    width: 16rem;}
+
+
+ body {
+    background-image: url('{% static 'images/de1.jpg' %}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+
+</style>
+
+<div  class="container mt-5">
+    <h1 class="mb-4">All Artists Collection</h1>
+
+    {% for letter, artists in grouped_artists.items %}
+
+        <h2>{{ letter }}</h2>
+
+        <div  data-aos="fade-right"
+     data-aos-offset="100"
+     data-aos-easing="ease-in-sine"  class="row">
+
+            {% for i in artists %}
+                <div  class="col-md-3 mb-5 custom-card-size">
+                    <div class="card">
+                        <img src="{{ i.Artist_photo.url }}" class="card-img-top">
+                        <div class="card-body">
+<!--                            <h5 class="card-title">{{ i.Artist_name }}</h5>-->
+
+
+                             <a href="{% url 'music:albums' i.Artist_name %}" class="btn btn-outline-primary">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

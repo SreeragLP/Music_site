@@ -1,0 +1,253 @@
+
+body {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text color */
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding-bottom: 70px;
+}
+
+
+h1, h3 {
+    color: #00FF00; /* Green header color */
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #00FF00; /* Green link color */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #fff; /* White link color on hover */
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7);
+}
+
+.card {
+
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    padding: 10px;
+    margin: 25px;
+    text-align: center;
+
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: inline-block;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+}
+
+.attractive-btn {
+    padding: 10px 20px;
+    background-color: #47b6ca; /* skyblue button color */
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    transition: transform 0.3s;
+    opacity: 0.5;
+}
+
+.attractive-btn:hover {
+    background-color: #007400; /* Darker green on hover */
+    transform: scale(1.05);
+}
+
+.attractive-btn:focus {
+    outline: none;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+}
+
+nav {
+    background-color: black;
+    border: 2px solid #47b6ca; /* skyblu border */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    width: 98%;
+    transition: background-color 2.3s, box-shadow .5s;
+    box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.6);
+    margin: 30px auto;
+    border-radius: 15px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: color 1.3s;
+}
+
+
+
+.myform {
+    max-width: 550px;
+    margin: 20px auto;
+    padding: 20px;
+    backdrop-filter:blur(10px);
+
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 255, 255, 1.5);
+}
+
+
+
+audeooo...
+
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #audio-player {
+            background-color: #212529;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            width: 400px;
+            text-align: center;
+            opacity: 0.9;
+            transition: opacity 0.5s;
+        }
+
+        #audio-player:hover {
+            opacity: 1;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        audio {
+            width: 100%;
+            margin: 20px 0;
+            background-color: #343a40;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+        }
+
+
+
+audio::-webkit-media-controls-play-button {
+            color: #007bff;
+        }
+
+
+
+/* Style for the dropdown menu */
+.dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.80); /* Black background with transparency */
+    border: 1px solid #47b6ca; /* Green border color */
+    border-radius: 0; /* Remove border radius */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Style for dropdown items */
+.dropdown-item {
+    color: white; /* Green text color */
+    font-weight: normal; /* Normal font weight */
+}
+
+
+
+/* Style for the dropdown toggle link */
+.nav-link.dropdown-toggle {
+    color: blue; /* Green text color */
+    font-weight: bold; /* Bold font weight for the toggle link */
+}
+
+/* Active state for the dropdown */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block; /* Show the menu when the parent is hovered */
+}
+
+/* Add padding to the dropdown items */
+.dropdown-item {
+    padding: 8px 12px;
+}
+
+
+
+
+/* Initially hide the search input */
+.search-form input {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; /* Use ease-in-out timing function */
+}
+
+
+.search-form:hover input {
+    display: block;
+    opacity: 1;
+}
+
+
+.loder {
+display: inline-flex;
+align-items:center;
+column-gap:5px;
+}
+
+
+.loader_dot {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: green;
+  opacity: 0.5;
+  border-radius: 50%;
+  animation: scale-up 1000ms var(--d) linear infinite;
+}
+
+@keyframes scale-up {
+  25% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+
+
+.form-label {
+  color: #47b6ca;
+  }

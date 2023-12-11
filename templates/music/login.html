@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+        background-image: url('{% static 'images/de1.jpg' %}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+
+
+    h1, .form-label {
+    color:#47b6ca }
+
+    .loader_dot {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        background-color: #47b6ca;
+        opacity: 0.5;
+        border-radius: 50%;
+        animation: scale-up 1000ms var(--d) linear infinite;
+    }
+
+    @keyframes scale-up {
+        25% {
+            opacity: 1;
+            transform: scale(1.5);
+        }
+        50% {
+            transform: scale(1);
+        }
+    }
+</style>
+
+
+<form data-aos="fade-up" data-aos-anchor-placement="center-bottom" method="POST" class="myform">
+    {% csrf_token %}
+
+    <h1>Login here</h1>
+
+    <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control" name="u" placeholder="Enter username">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" name="p" placeholder="Enter password">
+    </div>
+
+    <div class="mb-3">
+        <center>
+            <input type="submit" class="attractive-btn" style="padding: 4px 70px;">
+    </div>
+
+    <center>
+        <div class="loder">
+            <span class="loader_dot" style="--d: 200ms"></span>
+            <span class="loader_dot" style="--d: 400ms"></span>
+            <span class="loader_dot" style="--d: 600ms"></span>
+            <span class="loader_dot" style="--d: 800ms"></span>
+            <span class="loader_dot" style="--d: 1000ms"></span>
+        </div>
+    </center>
+
+</form>
+
+{% if messages %}
+
+<ul>
+    {% for msg in messages %}
+    <li>{{msg}}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}

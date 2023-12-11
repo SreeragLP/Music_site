@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="playlist-section">
+        <style>
+            .playlist-section {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .playlist-section h1 {
+                color: #2c3e50;
+                margin-bottom: 20px;
+            }
+
+
+
+            .playlist-section li {
+                border: 3px solid green;
+                border-radius: 8px;
+                background-color: #2c3e50;
+                margin: 10px 0;
+                padding: 20px;
+                display: flex;
+                justify-content: space-between;   /* gap between elemens */
+                align-items: center;
+                transition: background-color 0.3s;
+            }
+
+            .playlist-section li:hover {
+                background-color: black;
+            }
+
+            .playlist-section .play-link {
+                display: inline-block;
+                padding: 10px;
+                background-color: #3498db;
+                color: #fff;
+
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+
+            .playlist-section .play-link:hover {
+                background-color: red;
+            }
+
+
+        </style>
+
+        <h1>Your Favourites</h1>
+
+        {% if playlist %}
+            <ul data-aos="zoom-out">
+                {% for i in playlist %}
+                    <li>
+                        <span>{{ i.song.Song_title }}</span>
+                        <a href="{% url 'music:playlist_remove' i.id %}" class="play-link">Remove</a>
+                        <a href="{% url 'music:play' i.song.id %}" class="play-link">Play</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Your playlist is empty.</p>
+        {% endif %}
+    </div>
+{% endblock %}

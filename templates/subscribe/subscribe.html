@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+.loader_dot {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  background-color:  #47b6ca;
+  opacity: 0.5;
+  border-radius: 50%;
+  animation: scale-up 1000ms var(--d) linear infinite;
+}
+
+@keyframes scale-up {
+  25% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+</style>
+
+
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-6" style="background-color: black; padding: 10px; text-align: center;">
+
+        <img data-aos="zoom-in-up"
+             src="{% static 'images/b3o.jpg' %}" class="img-fluid"  style="width: 1200px; height:370px">
+
+        <img src="{% static 'images/su1.gif' %}" class="img-fluid"  style="width: 400px; height:300px">
+
+      </div>
+
+      <div class="col-md-6" style="background-color: #121212;  padding: 30px;">
+        <div class="text-center">
+
+          <h2 data-aos="zoom-in-down" style="color: #1DB954;">Welcome to Symphony Horizon!</h2>
+          <p class="lead">Discover and enjoy your favorite tunes.</p>
+
+        </div>
+
+
+        {% if not existing_subscription %}
+          <div >
+          <form data-aos="fade-up"
+                data-aos-anchor-placement="center-bottom"
+                method="POST"  class="myform">
+            {% csrf_token %}
+            <div class="mb-4 row">
+              <label class="form-label col-sm-2" style="color: #47b6ca;">Account Number</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="n" placeholder="Enter account number">
+              </div>
+            </div>
+            <div class="mb-3 text-center">
+              <input type="submit" class="attractive-btn" value="Submit">
+
+
+                <center><div class="loder" style="margin-top:20px;">
+    <span class="loader_dot" style="--d: 200ms"></span>
+    <span class="loader_dot" style="--d: 400ms"></span>
+    <span class="loader_dot" style="--d: 600ms"></span>
+    <span class="loader_dot" style="--d: 800ms"></span>
+    <span class="loader_dot" style="--d: 1000ms"></span>
+  </div><center>
+            </div>
+
+                        {% if messages %}
+
+                        <ul >
+                          {% for msg in messages %}
+                          <li style="color:red">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 24px; color: red;"></i>
+                            </a> {{msg}}</li>
+                          {% endfor %}
+
+                        </ul>
+                        {% endif %}
+          </form>
+            </div>
+
+
+        {% else %}
+
+        <div data-aos="flip-down">
+          <div class="text-center">
+            <h1 style="font-size: 24px; color: #FFD700;">You are already subscribed! Enjoy your premium music experience.</h1>
+          </div>
+
+          </div>
+
+        {% endif %}
+
+        <div class="featured  p-3 rounded">
+
+          <h3  data-aos="flip-left"
+              data-aos-easing="ease-out-cubic"
+              data-aos-duration="2000"> Special Offer!</h3>
+
+          <p > Unlock premium music streaming for just 199 Rs for life time. Limited time offer.</p>
+          <p> Access ad-free, high-quality audio.</p>
+        </div>
+
+        <div >
+
+          <h4>Why Choose Us?</h4>
+          <ul>
+
+            <li>Extensive Music Library</li>
+            <li>Personalized Playlists</li>
+            <li>Offline Listening</li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

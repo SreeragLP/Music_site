@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Western Music Site</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body>
+
+<header >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <div  class="container-fluid">
+
+            <a data-aos="zoom-in-right" class="navbar-brand" href="#">  Symphony Horizon</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'music:home' %}">
+                           <i class="fas fa-home" style="color: #3498db;"></i> Home</a>
+
+                    </li>
+
+
+
+
+                    <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Genres
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+               {% for i in mygenre %}
+
+            <li><a class="dropdown-item" href="{% url 'music:artist' i.g_name %}">
+                <i class="fas fa-music" style="color: #47b6ca;"></i> {{i.g_name}}</a></li>
+
+              {% endfor %}
+          </ul>
+        </li>
+
+
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'music:shuffle' %}">
+                            <i class="fas fa-random" style="color: #3498db;"></i>
+                         </a>
+                    </li>
+
+
+                    {% if user.is_authenticated %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'music:playlist' %}">
+                            <i class="fas fa-heart" style="color: #e74c3c;"></i>
+                         </a>
+                    </li>
+
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'music:all_artists' %}">
+                           <i class="fas fa-music" style="color: #3498db;"></i> Artists
+                         </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'music:all_albums' %}">
+                           <i class="fas fa-record-vinyl" style="color: #3498db;"></i> Albums
+                         </a>
+                    </li>
+
+
+                     <li class="nav-item">
+
+                        <a class="nav-link" href="{% url 'music:logout' %}">
+                            <i class="fas fa-sign-out-alt" style="color: #e74c3c;"></i> Logout</a>
+
+                    </li>
+
+
+
+                    {% else %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'music:register' %}">
+                            <i class="fas fa-user-plus" style="color: #2ecc71;"></i> Register</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'music:login' %}">
+                            <i class="fas fa-sign-in-alt" style="color: #3498db;"></i> Login</a>
+                    </li>
+
+                     {% endif %}
+
+
+
+
+
+                </ul>
+
+
+
+<div class="d-flex">
+    <form class="form-inline my-2 my-lg-0 mr-3 search-form" method="GET" action="{% url 'search:searchresult' %}">
+        {% csrf_token %}
+        <div class="input-group">
+            <input class="form-control" type="search" name="q" placeholder="Search your music" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+
+</div>
+
+
+
+
+
+{% if not existing_subscription %}
+
+    <a class="nav-link" href="{% url 'mysub:sub' %}">
+        <i class="fas fa-rss" style="color: yellow;">Subscribe</i>
+    </a>
+
+                {% else %}
+
+<a class="nav-link" href="{% url 'mysub:sub' %}">
+    <i class="fas fa-check-circle" style="color: green;"> Subscribed</i>
+</a>
+
+{% endif %}
+
+
+
+
+
+<div data-aos="zoom-in-left" id="div2" class="ml-auto">
+
+    <a  href="https://twitter.com/your_twitter_username" target="_blank" class="social-icon">
+        <i class="fa-brands fa-twitter"></i>
+    </a>
+    <a href="https://www.facebook.com/your_facebook_page" target="_blank" class="social-icon">
+        <i class="fa-brands fa-facebook-f"></i>
+    </a>
+</div>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+{% block content %}
+{% endblock %}
+
+
+
+</body>
+<script>
+  AOS.init();
+</script>
+</html>

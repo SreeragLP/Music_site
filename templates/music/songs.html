@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .song-container {
+            display: flex;
+
+            justify-content: space-around;
+            margin: 20px;
+        }
+
+        .song-card {
+            width: 300px;
+            margin: 10px;
+            padding: 20px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            background-color: #2c3e50;
+            text-align: center;
+        }
+
+        h5 {
+            color: white;
+        }
+
+        .play-link {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .play-link:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+<center>
+<h1>Songs in {{ album.Album_title }}</h1>
+
+<div  data-aos="zoom-in-down" class="song-container">
+    {% for i in songs %}
+        <div class="song-card">
+            <h5>{{ i.Song_title }}</h5>
+
+            <a href="{% url 'music:play' i.id %}" class="play-link">
+                 <i class="fas fa-play" style="color: white; font-size: 21px;"></i></a>
+
+            <a href="{% url 'music:add_to_playlist' i.id %}" class="play-link">Add to favourites</a>
+
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
